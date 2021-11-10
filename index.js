@@ -16,7 +16,9 @@ var fauth = function (req, res) {
 	res.send(eq)
 }
 
-express()
+var app = express()
   .get('/', fdefget)
   .get('/user/auth', fauth)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+module.exports = app;
