@@ -13,7 +13,7 @@ var fdefget = (_req, res) => {
 };
 
 var fauth = function (req, res) {
-	res.send(eq)
+	res.send(req)
 }
 
 var app = express()
