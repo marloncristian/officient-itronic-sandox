@@ -6,6 +6,8 @@ const client_secret = 'QGwbd45wo8kodrGURxlBvGhQCV3Bm9kgTn2dZX7TCbElrojHlh'
 const state = 'notimportant'
 const version = 1
 
+console.log(`version: ${version}`)
+
 var fdefget = (_req, res) => {
   res.redirect(301, `https://app.officient.io/authorize?client_id=${client_id}&state=${state}&version=${version}`);
 };
