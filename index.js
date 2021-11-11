@@ -30,9 +30,14 @@ var fauth = function (req, res) {
   .then(json => res.send(json));
 }
 
+var fping = (_req, res) => {
+  res.send('pong');
+};
+
 var app = express()
   .get('/', fdefget)
   .get('/user/auth', fauth)
+  .get('/ping', fping)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 module.exports = app;
