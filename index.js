@@ -1,13 +1,11 @@
 const express = require('express')
-const request = require('request')
+const https = require('https')
 
-const path = require('path')
 const PORT = process.env.PORT || 5000
-const client_id = '505748'
-const client_secret = 'QGwbd45wo8kodrGURxlBvGhQCV3Bm9kgTn2dZX7TCbElrojHlh'
+const client_id = '505747'
+const client_secret = '7Z7saqTfgJZK4DJ9ZgOH8IDodCwWmToUZEQlxEw1HrBkVxD5vo'
 const state = 'notimportant'
 const version = 1
-const fetch = require('node-fetch')
 
 console.log(`version: ${version}`)
 
@@ -16,18 +14,52 @@ var fdefget = (_req, res) => {
 };
 
 var fauth = function (req, res) {
-  let todo = {
-    code : req.query.code, 
-    client_id : 505748,
-    client_secret : 'QGwbd45wo8kodrGURxlBvGhQCV3Bm9kgTn2dZX7TCbElrojHlh',
-    grant_type : authorization_code
-  };
-  fetch('https://api.officient.io/1.0/token', {
-    method: 'POST',
-    body: JSON.stringify(todo),
-    headers: { 'Content-Type': 'application/json' }
-}).then(rsp => rsp.json())
-  .then(json => res.send(json));
+
+  let data = new TextEncoder().encode(
+    JSON.stringify({
+      code : 2, 
+      client_id : client_id,
+      client_secret : client_secret,
+      grant_type : 1
+    })
+  );
+  const options = {
+    hostname: 'www.globo.com',
+    port: 443,
+    //path: '',
+    method: 'GET',
+    // headers: {
+    //   'Content-Type': 'application/json',
+    //   'Content-Length': data.length
+    // }
+  }
+
+  const request = https.request(options, res => {
+    console.log(`statusCode: ${res.statusCode}`)
+    // request.on('data', d => {
+    //   process.stdout.write(d)
+    // })
+  })
+
+  request.on('error', error => {
+    console.error(error)
+  })
+
+  // import('./node_modules/node-fetch/src/index.js')
+  // .then(fetch => {
+  //   console.log('success');
+  //   console.log(JSON.stringify(fetch))
+  // })
+  // .catch(err => {
+  //   console.log(err);
+  // })
+
+//   fetch('https://api.officient.io/1.0/token', {
+//     method: 'POST',
+//     body: JSON.stringify(todo),
+//     headers: { 'Content-Type': 'application/json' }
+// }).then(rsp => rsp.json())
+//   .then(json => res.send(json));
 }
 
 var fping = (_req, res) => {
