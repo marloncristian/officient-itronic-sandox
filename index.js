@@ -1,16 +1,14 @@
 const express = require('express')
 const https = require('https')
+const { v4: uuidv4 } = require('uuid');
 
 const PORT = process.env.PORT || 5000
 const client_id = '505747'
 const client_secret = '7Z7saqTfgJZK4DJ9ZgOH8IDodCwWmToUZEQlxEw1HrBkVxD5vo'
 const state = 'notimportant'
-const version = 1
-
-console.log(`version: ${version}`)
 
 var fdefget = (_req, res) => {
-  res.redirect(301, `https://app.officient.io/authorize?client_id=${client_id}&state=${state}&version=${version}`);
+  res.redirect(301, `https://app.officient.io/authorize?client_id=${client_id}&state=${state}&version=${uuidv4()}`);
 };
 
 var fauth = function (req, res) {
